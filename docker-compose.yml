@@ -51,8 +51,7 @@ services:
       - rustfs-network
     restart: unless-stopped
     depends_on:
-      rustfs:
-        condition: service_healthy
+      - rustfs
 
 networks:
   rustfs-network:
