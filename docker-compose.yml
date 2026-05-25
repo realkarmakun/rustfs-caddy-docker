@@ -40,9 +40,11 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "443:443/udp"
     environment:
       RUSTFS_S3_DOMAIN: ${RUSTFS_S3_DOMAIN}
       RUSTFS_CONSOLE_DOMAIN: ${RUSTFS_CONSOLE_DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL to your real email address}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
@@ -51,7 +53,8 @@ services:
       - rustfs-network
     restart: unless-stopped
     depends_on:
-      - rustfs
+      rustfs:
+        condition: service_healthy
 
 networks:
   rustfs-network:
