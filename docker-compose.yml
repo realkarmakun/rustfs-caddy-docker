@@ -47,8 +47,8 @@ services:
       ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL to your real email address}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
+      - ./data/caddy:/data
+      - ./data/caddy-config:/config
     networks:
       - rustfs-network
     restart: unless-stopped
@@ -59,7 +59,3 @@ services:
 networks:
   rustfs-network:
     driver: bridge
-
-volumes:
-  caddy_data:
-  caddy_config:

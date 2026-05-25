@@ -13,7 +13,7 @@ Copy `.env.example` to `.env` and fill in the values before starting.
 git clone https://github.com/realkarmakun/rustfs-caddy-docker
 cd rustfs-caddy-docker
 cp .env.example .env
-mkdir -p data/rustfs logs
-chown -R 10001:10001 data logs
+mkdir -p data/rustfs data/caddy data/caddy-config logs
+chown -R 10001:10001 data/rustfs logs
 docker-compose up -d
 ```
