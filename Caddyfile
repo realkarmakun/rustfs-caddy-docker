@@ -1,0 +1,25 @@
+{
+	email admin@example.com
+}
+
+{$RUSTFS_S3_DOMAIN} {
+	encode zstd gzip
+
+	reverse_proxy rustfs:9000 {
+		header_up Host {host}
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+}
+
+{$RUSTFS_CONSOLE_DOMAIN} {
+	encode zstd gzip
+
+	reverse_proxy rustfs:9001 {
+		header_up Host {host}
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+}
